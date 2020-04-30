@@ -13,14 +13,27 @@ require 'faker'
 end
 
 10.times do
+    speciality= Speciality.create(name_speciality:Faker::Games::Pokemon.move)
+end
+
+
+10.times do
     doctor=Doctor.create(first_name:Faker::JapaneseMedia::DragonBall.character, last_name:Faker::Name.last_name,
-    speciality:["généraliste", "Chirurgien", "dentiste"].sample, zip_code: "#{rand(1000..9000)}0",city:City.all.sample)
+    zip_code: "#{rand(1000..9000)}0",city:City.all.sample)
 end 
+
+20.times do
+    join_speciality= JoinSpeciality.create(number_speciality:"#{rand(1..10)}",doctor: Doctor.all.sample, speciality: Speciality.all.sample)
+end
 
 10.times do 
     patient= Patient.create(first_name:Faker::JapaneseMedia::OnePiece.character,last_name:Faker::Name.last_name,city:City.all.sample ) 
 end 
 
+
 20.times do 
-    rdv= Appointement.create(date:Faker::Date.in_date_period(year: 2020, month: 5) , doctor: Doctor.all.sample, patient: Patient.all.sample,city:City.all.samp)
+    rdv= Appointement.create(date:Faker::Date.in_date_period(year: 2020, month: 5) , doctor: Doctor.all.sample, 
+    patient: Patient.all.sample,city:City.all.sample)
 end
+
+
